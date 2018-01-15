@@ -1,10 +1,12 @@
-
 const express = require('express');
 const router = express.Router();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-const {ShoppingList, Recipes} = require('./models');
+const {
+  ShoppingList,
+  Recipes
+} = require('./models');
 
 const jsonParser = bodyParser.json();
 const app = express();
@@ -34,7 +36,7 @@ app.get('/shopping-list', (req, res) => {
 app.post('/shopping-list', jsonParser, (req, res) => {
   // ensure `name` and `budget` are in request body
   const requiredFields = ['name', 'budget'];
-  for (let i=0; i<requiredFields.length; i++) {
+  for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`
@@ -54,7 +56,7 @@ app.post('/shopping-list', jsonParser, (req, res) => {
 // call `ShoppingList.update` with updated item.
 app.put('/shopping-list/:id', jsonParser, (req, res) => {
   const requiredFields = ['name', 'budget', 'id'];
-  for (let i=0; i<requiredFields.length; i++) {
+  for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`
@@ -93,7 +95,7 @@ app.get('/recipes', (req, res) => {
 app.post('/recipes', jsonParser, (req, res) => {
   // ensure `name` and `budget` are in request body
   const requiredFields = ['name', 'ingredients'];
-  for (let i=0; i<requiredFields.length; i++) {
+  for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`
@@ -111,6 +113,6 @@ app.delete('/recipes/:id', (req, res) => {
   res.status(204).end();
 });
 
-app.listen(process.env.PORT || 8080, () => {
-  console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
-});
+app.listen(process.env.PORT || 8060, () => {
+  console.log(`Your app is listening on port ${process.env.PORT || 8060}`);
+})
